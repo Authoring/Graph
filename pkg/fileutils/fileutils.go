@@ -26,6 +26,20 @@ func WriteFile(base, name string, data []byte) error {
 	return ioutil.WriteFile(filepath, data, os.ModePerm)
 }
 
+// WriteFileInBase write file in base
+func WriteFileInBase(base string, data []byte) error {
+	initBaseFolder()
+	b := path.Join(baseFolder, fmt.Sprintf("%s.yml", base))
+	return ioutil.WriteFile(b, data, os.ModePerm)
+}
+
+// ReadFileInBase read file in base
+func ReadFileInBase(base string) ([]byte, error) {
+	initBaseFolder()
+	b := path.Join(baseFolder, fmt.Sprintf("%s.yml", base))
+	return ioutil.ReadFile(b)
+}
+
 // GetBaseAndFilePath get the base and filepath
 func GetBaseAndFilePath(base string, name string) (string, string) {
 	p := path.Join(baseFolder, fmt.Sprintf("%s.db", base))
